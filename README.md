@@ -1,117 +1,104 @@
-# Grafana panel plugin template
+IKU – Berat Panel Plugin
 
-This template is a starting point for building a panel plugin for Grafana.
+Custom Grafana panel plugin developed as part of Istanbul Kültür University Grafana Plugin Project.
 
-## What are Grafana panel plugins?
+This plugin visualizes numeric data inside a dynamic SVG circle, where the color changes based on value thresholds.
+It provides a simple, clean and configurable visualization component.
 
-Panel plugins allow you to add new types of visualizations to your dashboard, such as maps, clocks, pie charts, lists, and more.
+Project Purpose
 
-Use panel plugins when you want to do things like visualize data returned by data source queries, navigate between dashboards, or control external systems (such as smart home devices).
+The aim of this project is to develop a custom Grafana panel plugin using:
 
-## Getting started
+React
 
-### Frontend
+TypeScript
 
-1. Install dependencies
+Grafana Plugin SDK
 
-   ```bash
-   npm install
-   ```
+The plugin allows users to:
 
-2. Build plugin in development mode and run in watch mode
+✔ Display real-time numeric values
+✔ Automatically color the circle based on value
+✔ Customize panel background
+✔ Add text information
+✔ Enable centered layout
 
-   ```bash
-   npm run dev
-   ```
+ Features
 
-3. Build plugin in production mode
+Dynamic SVG Circle Visualization
 
-   ```bash
-   npm run build
-   ```
+Value displayed inside the circle
 
-4. Run the tests (using Jest)
+Threshold-based color states:
 
-   ```bash
-   # Runs the tests and watches for changes, requires git init first
-   npm run test
+Value	Color
+< 50	Green
+50 – 80	Orange
+> 80	Red
 
-   # Exits after running all the tests
-   npm run test:ci
-   ```
+Customizable options:
 
-5. Spin up a Grafana instance and run the plugin inside it (using Docker)
+Background color
 
-   ```bash
-   npm run server
-   ```
+Text value
 
-6. Run the E2E tests (using Playwright)
+Text size
 
-   ```bash
-   # Spins up a Grafana instance first that we tests against
-   npm run server
+Center text mode
 
-   # If you wish to start a certain Grafana version. If not specified will use latest by default
-   GRAFANA_VERSION=11.3.0 npm run server
+Compatible with time-series data
 
-   # Starts the tests
-   npm run e2e
-   ```
+Works with Random Walk test data
 
-7. Run the linter
+Built fully with React + TypeScript
 
-   ```bash
-   npm run lint
+ Bonus Features Implemented
 
-   # or
+✔ Custom panel options menu
+✔ Dynamic SVG rendering
+✔ Real-time field value mapping
+✔ Panel author signature
+✔ Optional series counter
+✔ Panel description footer
+✔ Works without data source (fallback mode)
 
-   npm run lint:fix
-   ```
+These features extend default panel behavior
 
-# Distributing your plugin
+ Screenshots
 
-When distributing a Grafana plugin either within the community or privately the plugin must be signed so the Grafana application can verify its authenticity. This can be done with the `@grafana/sign-plugin` package.
+Panel View
+(buraya panel ekran görüntüsünü ekleyeceğiz)
 
-_Note: It's not necessary to sign a plugin during development. The docker development environment that is scaffolded with `@grafana/create-plugin` caters for running the plugin without a signature._
+Options Panel
+(options screenshot eklenebilir)
 
-## Initial steps
+ Installation & Build
 
-Before signing a plugin please read the Grafana [plugin publishing and signing criteria](https://grafana.com/legal/plugins/#plugin-publishing-and-signing-criteria) documentation carefully.
+Install dependencies
 
-`@grafana/create-plugin` has added the necessary commands and workflows to make signing and distributing a plugin via the grafana plugins catalog as straightforward as possible.
+npm install
 
-Before signing a plugin for the first time please consult the Grafana [plugin signature levels](https://grafana.com/legal/plugins/#what-are-the-different-classifications-of-plugins) documentation to understand the differences between the types of signature level.
 
-1. Create a [Grafana Cloud account](https://grafana.com/signup).
-2. Make sure that the first part of the plugin ID matches the slug of your Grafana Cloud account.
-   - _You can find the plugin ID in the `plugin.json` file inside your plugin directory. For example, if your account slug is `acmecorp`, you need to prefix the plugin ID with `acmecorp-`._
-3. Create a Grafana Cloud API key with the `PluginPublisher` role.
-4. Keep a record of this API key as it will be required for signing a plugin
+Development mode
 
-## Signing a plugin
+npm run dev
 
-### Using Github actions release workflow
 
-If the plugin is using the github actions supplied with `@grafana/create-plugin` signing a plugin is included out of the box. The [release workflow](./.github/workflows/release.yml) can prepare everything to make submitting your plugin to Grafana as easy as possible. Before being able to sign the plugin however a secret needs adding to the Github repository.
+Production build
 
-1. Please navigate to "settings > secrets > actions" within your repo to create secrets.
-2. Click "New repository secret"
-3. Name the secret "GRAFANA_API_KEY"
-4. Paste your Grafana Cloud API key in the Secret field
-5. Click "Add secret"
+npm run build
 
-#### Push a version tag
 
-To trigger the workflow we need to push a version tag to github. This can be achieved with the following steps:
+Copy plugin to Grafana plugins folder
 
-1. Run `npm version <major|minor|patch>`
-2. Run `git push origin main --follow-tags`
+/var/lib/grafana/plugins/
 
-## Learn more
 
-Below you can find source code for existing app plugins and other related documentation.
+Enable unsigned plugins
 
-- [Basic panel plugin example](https://github.com/grafana/grafana-plugin-examples/tree/master/examples/panel-basic#readme)
-- [`plugin.json` documentation](https://grafana.com/developers/plugin-tools/reference/plugin-json)
-- [How to sign a plugin?](https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin)
+allow_loading_unsigned_plugins = iku-berat-panel
+
+
+Restart Grafana
+
+systemctl restart grafana-server
